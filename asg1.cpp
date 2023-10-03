@@ -84,13 +84,9 @@ void displayOne(int i)
 
 void displayFirstTen()
 {
-    // for (int i=0;i<10;i++)
-    // {
-    //     cout<<"Name : "<<s[i].name<<"\t Roll No. : "<<s[i].roll<<"\t SGPA : "<<s[i].sgpa<<endl;
-    // }
-    for(int i= 14 ; i > 4; i--)
+    for (int i=14;i>4;i--)
     {
-        cout<<s[i].roll<<" "<<s[i].name<<" "<<s[i].sgpa<<endl;
+        cout<<"Name : "<<s[i].name<<"\t Roll No. : "<<s[i].roll<<"\t SGPA : "<<s[i].sgpa<<endl;
     }
 }
 
