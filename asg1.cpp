@@ -43,13 +43,14 @@ void insertionSort()
 void quickSort(int first,int last)
 {
     int p,i,j;
-    p=i=first;j=last;
+    p=i=first;
+    j=last;
 
     if(first<last)
     {
         while(i<j)
         {
-            while(s[i].sgpa<s[p].sgpa && i<last)
+            while(s[i].sgpa<=s[p].sgpa && i<last)
                 i++;
             while(s[j].sgpa>s[p].sgpa)
                 j--;
@@ -60,9 +61,9 @@ void quickSort(int first,int last)
                 s[j]=temp;
             }
         }
-        temp=s[j];
-        s[j]=s[p];
-        s[p]=temp;
+        temp=s[p];
+        s[p]=s[j];
+        s[j]=temp;
         quickSort(first,j-1);
         quickSort(j+1,last);
     }
@@ -72,26 +73,24 @@ void display()
 {
     for (int i=0;i<15;i++)
     {
-        cout<<"Name : "<<s[i].name<<endl;
-        cout<<"Roll No. : "<<s[i].roll<<endl;
-        cout<<"SGPA : "<<s[i].sgpa<<endl;
+        cout<<"Name : "<<s[i].name<<"\t Roll No. : "<<s[i].roll<<"\t SGPA : "<<s[i].sgpa<<endl;
     }
 }
 
 void displayOne(int i)
 {
-    cout<<"Name : "<<s[i].name<<endl;
-    cout<<"Roll No. : "<<s[i].roll<<endl;
-    cout<<"SGPA : "<<s[i].sgpa<<endl;
+    cout<<"Name : "<<s[i].name<<"\t Roll No. : "<<s[i].roll<<"\t SGPA : "<<s[i].sgpa<<endl;
 }
 
 void displayFirstTen()
 {
-    for (int i=0;i<10;i++)
+    // for (int i=0;i<10;i++)
+    // {
+    //     cout<<"Name : "<<s[i].name<<"\t Roll No. : "<<s[i].roll<<"\t SGPA : "<<s[i].sgpa<<endl;
+    // }
+    for(int i= 14 ; i > 4; i--)
     {
-        cout<<"Name : "<<s[i].name<<endl;
-        cout<<"Roll No. : "<<s[i].roll<<endl;
-        cout<<"SGPA : "<<s[i].sgpa<<endl;
+        cout<<s[i].roll<<" "<<s[i].name<<" "<<s[i].sgpa<<endl;
     }
 }
 
@@ -104,7 +103,7 @@ void linearSearch(float x)
 
 void binarySearch(string x)
 {
-    int mid=2,l=0,h=4;
+    int l=0,h=14;
     while (l <= h) 
     {
         int mid = l + (h - l) / 2;
@@ -123,77 +122,52 @@ void binarySearch(string x)
 
 int main()
 {
-    for (int i = 0; i < 15; i++) 
+    for (int i=0;i<15;i++)
     {
-        cout << "Enter name for Student " << i + 1 << ": ";
-        cin.ignore(); // Clear the input buffer
-        getline(cin, s[i].name);
-
-        cout << "Enter roll number for Student " << i + 1 << ": ";
-        cin >> s[i].roll;
-
-        cout << "Enter SGPA for Student " << i + 1 << ": ";
-        cin >> s[i].sgpa;
-
-        cout << endl;
+        cin>>s[i].name;
+        cin>>s[i].roll;
+        cin>>s[i].sgpa;
     }
-    // for (int i=0;i<15;i++)
-    // {
-    //     cin>>s[i].name;
-    //     cin>>s[i].roll;
-    //     cin>>s[i].sgpa;
-    // }
     float sg;
     string nm;
     int ch;
-    cout<<"Enter your choice : \n 1 : List of students roll number wise \n 2 : List of students alphabetically \n 3 : First 10 toppers are \n 4 :  Search students according to SGPA \n 5 : Search a particular student according to name \n";
-    cin>>ch;
-    switch(ch)
+    char cont='y';
+    while(cont=='y')
     {
-        case 1 :cout<<"List of students roll number wise : "<<endl;
-                bubbleSort();
-                display();
-                cout<<endl;
-                break;
-        case 2 :cout<<"List of students alphabetically : "<<endl;
-                insertionSort();
-                display();
-                cout<<endl;
-                break;
-        case 3 :cout<<"First 10 toppers are : "<<endl;
-                quickSort(0,14);
-                displayFirstTen();
-                cout<<endl;
-                break;
-        case 4 :cout<<"Enter the students SGPA you want to find \n";
-                cin>>sg;
-                linearSearch(sg);
-                cout<<endl;
-                break;
-        case 5 :cout<<"Enter the students name whose information is to be displayed \n";
-                cin>>nm;
-                insertionSort();
-                binarySearch(nm);
-                cout<<endl;
-                break;
+        cout<<"Enter your choice : \n 1 : List of students roll number wise \n 2 : List of students alphabetically \n 3 : First 10 toppers are \n 4 : Search students according to SGPA \n 5 : Search a particular student according to name \n";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1 :cout<<"List of students roll number wise : "<<endl;
+                    bubbleSort();
+                    display();
+                    cout<<endl;
+                    break;
+            case 2 :cout<<"List of students alphabetically : "<<endl;
+                    insertionSort();
+                    display();
+                    cout<<endl;
+                    break;
+            case 3 :cout<<"First 10 toppers are : "<<endl;
+                    quickSort(0,14);
+                    displayFirstTen();
+                    cout<<endl;
+                    break;
+            case 4 :cout<<"Enter the students SGPA you want to find \n";
+                    cin>>sg;
+                    linearSearch(sg);
+                    cout<<endl;
+                    break;
+            case 5 :cout<<"Enter the students name whose information is to be displayed \n";
+                    cin>>nm;
+                    insertionSort();
+                    binarySearch(nm);
+                    cout<<endl;
+                    break;
+            default:cout<<"invalid input"<<endl;
+                    break;
+        }
+        cout<<"Do you want to continue ? press y/n ";
+        cin>>cont;
     }
-    // cout<<"List of students roll number wise : "<<endl;
-    // bubbleSort();
-    // display();
-    // cout<<endl;
-    // cout<<"List of students alphabetically : "<<endl;
-    // insertionSort();
-    // display();
-    // cout<<endl;
-    // cout<<"First 10 toppers are : "<<endl;
-    // quickSort();
-    // displayFirstTen();
-    // cout<<"Enter the students SGPA you want to find \n";
-    // cin>>sg;
-    // linearSearch(sg);
-    // cout<<endl;
-    // cout<<"Enter the students name whose information is to be displayed \n";
-    // cin>>nm;
-    // insertionSort();
-    // binarySearch(nm);
 }
