@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 struct
 {
@@ -10,9 +10,9 @@ struct
 
 void bubbleSort()
 {
-    for (int i = 0; i < 15; i++) 
+    for (int i = 0; i < 14; i++) 
     {
-      for (int j = 0; j < 15 - i; j++) 
+      for (int j = 0; j < 14; j++) 
         {
             if (s[j].roll > s[j + 1].roll) 
             {
@@ -92,32 +92,50 @@ void displayFirstTen()
 
 void linearSearch(float x)
 {
+    int c=0;
     for (int i = 0; i < 15; i++)
-        if (s[i].sgpa == x)
-            displayOne(i);
+        {
+            if (s[i].sgpa == x)
+            {
+                displayOne(i);
+                c++;
+            }
+        }
+    if(c==0)
+    {
+        cout<<"No such student found ";
+    }    
 }
 
 void binarySearch(string x)
 {
+    int c=0;
     int l=0,h=14;
     while (l <= h) 
     {
-        int mid = l + (h - l) / 2;
+        int mid = (h + l) / 2;
  
         if (s[mid].name == x)
-            displayOne(mid);
- 
+            {
+                displayOne(mid);
+                c++;
+            }
         if (s[mid].name < x)
             l = mid + 1;
  
         else
             h = mid - 1;
     }
+    if(c==0)
+    {
+        cout<<"No student found";
+    }
 }
 
 
 int main()
 {
+    cout<<"Enter the Name,Roll number and SGPA of 15 students : \n";
     for (int i=0;i<15;i++)
     {
         cin>>s[i].name;
@@ -130,7 +148,7 @@ int main()
     char cont='y';
     while(cont=='y')
     {
-        cout<<"Enter your choice : \n 1 : List of students roll number wise \n 2 : List of students alphabetically \n 3 : First 10 toppers are \n 4 : Search students according to SGPA \n 5 : Search a particular student according to name \n";
+        cout<<"Enter your choice : \n 1 : List of students roll number wise (Using Bubble Sort) \n 2 : List of students alphabetically (Using Insertion Sort) \n 3 : First 10 toppers are (Using Quick Sort)\n 4 : Search students according to SGPA (Using Linear Search)\n 5 : Search a particular student according to name (Using Binary Search)\n";
         cin>>ch;
         switch(ch)
         {
