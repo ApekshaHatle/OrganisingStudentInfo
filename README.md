@@ -1,4 +1,6 @@
-# OrganisingStudentInfo
+#DSA Assignments
+
+Assignment 1 : 
 Organising the data of a number of students using various sorting techniques
 
 
@@ -9,3 +11,6 @@ b) Arrange list of students alphabetically. (Use Insertion sort)
 c) Arrange list of students to find out first ten toppers from a class. (Use Quick sort)
 d) Search students according to SGPA. If more than one student has the same SGPA, then print a list of all students having the same SGPA. (Use Linear Search)
 e) Search a particular student according to name (Use binary search without recursion). (all the student records having the presence of search key should be displayed)
+
+Assignment 2 :
+Expression conversion and expression evaluation using user-defined stack
