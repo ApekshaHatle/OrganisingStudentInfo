@@ -6,7 +6,6 @@ struct node
     char data;
     struct node *next;
 };
-int top=-1,n;
 
 int PUSH(node *&head,char data,int top,int n)
 {
@@ -71,51 +70,51 @@ void display(node *head)
 int main()
 {
     string infix,postfix="",prefix="";
+
     cout<<"Enter the infix :\n";
     cin>>infix;
+
     int top=-1,n=infix.size();
-    cout<<n;
     node *stack=NULL;
-    top=PUSH(stack,'e',top,n);
-    cout<<top<<endl;
-    top=PUSH(stack,'i',top,n);
-    cout<<top<<endl;
-    top=PUSH(stack,'o',top,n);
-    cout<<top<<endl;
-    top=POP(stack,top,n);
-    cout<<top<<endl;
-    // int ch;
-    // cout<<"Enter 1 for postfix \n Enter 2 for prefix : \n";
-    // cin>>ch;
-    // switch(ch)
-    // {
-    //     case 1: while(i!=(n-1))
-    //             {
-    //                 if(infix[i]!='^'||'$'||'*'||'/'||'%'||'+'||'-'||'('||')')
-    //                 {
-    //                     postfix.append(infix[i]);
-    //                 }
-    //                 else
-    //                 {
-    //                     if(stack==NULL)
-    //                     {
-    //                         postfix.append(infix[i]);
-    //                     }
-    //                     else if(infix[i]=='(')
-    //                     {
-    //                         postfix.append(infix[i]);
-    //                     }
-    //                     else if(infix[i]==')')
-    //                     {
-    //                         if()
-    //                     }
+
+    int ch;
+    cout<<"Enter 1 for postfix \n Enter 2 for prefix : \n";
+    cin>>ch;
+    switch(ch)
+    {
+        case 1: while(i!=(n-1))
+                {
+                    if(infix[i]!='^'||'$'||'*'||'/'||'%'||'+'||'-'||'('||')')
+                    {
+                        postfix.append(infix[i]);
+                    }
+                    else
+                    {
+                        if(stack==NULL)
+                        {
+                            top=PUSH(stack,infix[i],top,n);
+                        }
+                        else if(infix[i]=='(')
+                        {
+                            top=PUSH(stack,infix[i],top,n);
+                        }
+                        else if(infix[i]==')')
+                        {
+                            while(stack->data!='(')
+                            {
+                                postfix.append(stack->data);
+                                top=POP(stack,infix[i],top,n);
+                            }
+                            top=POP(stack,infix[i],top,n);
+                        }
                         
-    //                 }
-    //                 i++;
-    //             }
-    //             break;
-    //     case 2:
-    // }
+                        
+                    }
+                    i++;
+                }
+                break;
+        case 2:
+    }
     
     display(stack);
 
