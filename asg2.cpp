@@ -348,7 +348,6 @@ int main()
     case 4:
         cout << "Enter the prefix expression:\n";
         cin >> prefix;
-        reverse(prefix.begin(), prefix.end());
         cout << "Prefix Evaluation Result: " << prefixEvaluation(prefix) << endl;
         break;
     default:
