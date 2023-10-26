@@ -354,6 +354,5 @@ int main()
     default:
         cout << "Invalid choice." << endl;
     }
-    cout<< blah;
     return 0;
 }
