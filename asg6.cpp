@@ -1,141 +1,212 @@
 #include <iostream>
 using namespace std;
 
-// Node structure for the threaded binary tree
-struct Node {
-    int key;
-    Node* left;
-    Node* right;
-    bool leftThread;
-    bool rightThread;
-
-    Node(int value) : key(value), left(nullptr), right(nullptr), leftThread(false), rightThread(false) {}
+struct Node
+{
+    struct Node *left,*right;
+    int data;
+    
+    bool leftthread;
+    bool rightthread;
 };
 
-// Function to insert a key into the threaded binary tree
-Node* insert(Node* root, int key) {
-    Node* newNode = new Node(key);
-
-    if (root == nullptr) {
-        return newNode;
-    }
-
-    Node* current = root;
-    Node* parent = nullptr;
-
-    while (current != nullptr) {
-        parent = current;
-
-        if (key < current->key) {
-            if (!current->leftThread) {
-                current = current->left;
-            } else {
-                break;
-            }
-        } else if (key > current->key) {
-            if (!current->rightThread) {
-                current = current->right;
-            } else {
-                break;
-            }
-        } else {
-            // Duplicate key, ignore for this example
-            delete newNode;
+struct Node *Insert(struct Node*root, int key)
+{
+    struct Node *node = root;
+    struct Node *par = NULL;
+    while(node != NULL)
+    {
+        if(key == (node->data))
+        {
+            cout<<"Duplicate key"<<endl;
             return root;
         }
+        
+        par = node;
+        
+        if(key < (node->data))
+        {
+            if(node->leftthread == false)
+            {
+                node = node->left;
+            }
+            else
+            break;
+        }
+        else
+        {
+            if(node->rightthread == false)
+            {
+                node = node->right;
+            }
+            else
+            break;
+        }
+        
     }
-
-    if (key < parent->key) {
-        newNode->left = parent->left;
-        newNode->right = parent;
-        parent->left = newNode;
-        parent->leftThread = true;
-    } else {
-        newNode->left = parent;
-        newNode->right = parent->right;
-        parent->right = newNode;
-        parent->rightThread = true;
+    
+    struct Node *temp = new Node;
+    temp->data = key;
+    temp->leftthread = true;
+    temp->rightthread = true;
+    
+    if(par == NULL)
+    {
+        root = temp;
+        temp->left = NULL;
+        temp->right = NULL;
     }
-
-    return root;
+    else if (key < (par -> data)) 
+    { 
+        temp -> left = par -> left; 
+        temp -> right = par; 
+        par -> leftthread = false; 
+        par -> left = temp; 
+    } 
+    else
+    { 
+        temp -> left = par; 
+        temp -> right = par -> right; 
+        par -> rightthread = false; 
+        par -> right = temp; 
+    } 
+  
+    return root; 
 }
 
-// Function to find the in-order successor of a node in a threaded binary tree
-Node* inOrderSuccessor(Node* node) {
-    if (node->rightThread) {
-        return node->right;
-    } else {
+struct Node *InorderSuccessor(struct Node *node)
+{
+    if(node->rightthread == true)
+    {
+        return (node->right);
+    }
+    else
+    {
         node = node->right;
-        while (node->leftThread) {
+        while(node->leftthread == false)
+        {
             node = node->left;
         }
-        return node;
+    }
+    
+    return node;
+}
+void InorderTBT(struct Node *root)
+{
+
+    if(root == NULL)
+    {
+        cout<<"Empty Tree"<<endl;
+    }
+    else
+    {
+        struct Node *node = root;
+        
+        
+        while(node->leftthread == false)
+        {
+            node = node->left;
+        }
+        while(node != NULL)
+        {
+            cout<<" "<<node->data;
+            node = InorderSuccessor(node);
+        }
     }
 }
 
-// Function to traverse the threaded binary tree in in-order
-// Function to traverse the threaded binary tree in in-order
-// Function to traverse the threaded binary tree in in-order
-void inOrderTraversal(Node* root) {
-    Node* current = root;
-
-    while (current != nullptr) {
-        while (current->left != nullptr && !current->leftThread) {
-            current = current->left;
+void PreorderTBT(struct Node *root )  
+{  
+        struct Node *node;  
+        if(root == NULL)  
+        {  
+                cout<<"Empty Tree "<<endl;  
+                return;  
         }
-
-        cout << current->key << " ";
-
-        if (current->rightThread) {
-            current = current->right;
-        } else {
-            current = current->right;
-            while (current != nullptr && current->leftThread) {
-                current = current->left;
+        
+        node = root;  
+        while(node != NULL)  
+        {  
+                cout<<" "<<node->data; 
+                
+                if(node->leftthread == false)
+                {
+                        node=node->left;  
+                }        
+                else if(node->rightthread == false)  
+                {
+                        node = node->right; 
+                }
+                
+                else  
+                {  
+                        while(node != NULL && node->rightthread == true) 
+                        
+                                node = node->right;  
+                        if(node != NULL)  
+                                node = node->right;  
+                }  
+        }  
+}  
+int main()
+{
+    struct Node *root = NULL;
+    int choice;
+    	
+    while(1)
+    {
+ 
+ 
+        cout<<"1.Insert "<<endl;
+        cout<<"2.InOrder Traversal "<<endl;
+        cout<<"3.Preorder Traversal"<<endl;
+        
+        
+        cout<<"Enter your choice : "<<endl;
+        cin>>choice;
+ 	       
+        switch(choice)
+        {
+            case 1:
+            {
+                cout<<"Enter the element you want to Insert : "<<endl;
+                cin>>choice;
+                root = Insert(root, choice);
+                
             }
+            break;
+            
+            case 2:
+            {
+                cout<<"Inorder Traversal Of TBT : ";
+                InorderTBT(root);
+                cout<<endl;
+            }
+            break;
+            
+            case 3:
+            {
+                cout<<"Preorder Traversal Of TBT : ";
+                PreorderTBT(root);
+                cout<<endl;
+            }
+            break;
+            
+            case 4:
+            {
+                exit(0);
+                
+            }
+            break;
+            
+            default:
+            {
+                cout << "Invalid Choice." << endl;
+            }
+            break;
+   
         }
+        
     }
-}
-
-
-// Function to traverse the threaded binary tree in pre-order
-void preOrderTraversal(Node* root) {
-    Node* current = root;
-
-    while (current != nullptr) {
-        cout << current->key << " ";
-
-        if (!current->leftThread) {
-            current = current->left;
-        } else if (!current->rightThread) {
-            current = current->right;
-        } else {
-            current = inOrderSuccessor(current);
-        }
-    }
-}
-
-int main() {
-    Node* root = nullptr;
-
-    // Insertion
-    root = insert(root, 50);
-    root = insert(root, 30);
-    root = insert(root, 70);
-    root = insert(root, 20);
-    root = insert(root, 40);
-    root = insert(root, 60);
-    root = insert(root, 80);
-
-    // In-order traversal
-    cout << "In-order Traversal: ";
-    inOrderTraversal(root);
-    cout << endl;
-
-    // Pre-order traversal
-    cout << "Pre-order Traversal: ";
-    preOrderTraversal(root);
-    cout << endl;
-
-    return 0;
+    return 0;  
 }
