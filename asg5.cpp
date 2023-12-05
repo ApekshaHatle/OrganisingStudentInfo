@@ -41,27 +41,43 @@ Node* findMin(Node* root) {
 // Function to delete a key from the BST
 Node* deleteNode(Node* root, int key) {
     if (root == nullptr) {
+        cout<<"it is empty \n";
         return root;
     }
 
-    if (key < root->key) {
+    if (key < root->key) 
+    {
         root->left = deleteNode(root->left, key);
-    } else if (key > root->key) {
+    } 
+    else if (key > root->key) 
+    {
         root->right = deleteNode(root->right, key);
-    } else {
-        if (root->left == nullptr) {
-            Node* temp = root->right;
+    }
+    else //we found the element to be deleted
+    {
+        if (root->left == NULL && root->right == NULL)    //CASE 1 :no child
+        { 
             delete root;
-            return temp;
-        } else if (root->right == nullptr) {
-            Node* temp = root->left;
-            delete root;
-            return temp;
+            root=NULL;
         }
-
-        Node* temp = findMin(root->right);
-        root->key = temp->key;
-        root->right = deleteNode(root->right, temp->key);
+        else if (root->left==NULL)       //CASE 2: ONE CHILD
+        {      
+            Node* temp = root;
+            root=root->right;
+            delete temp;
+        }
+        else if(root->right==NULL)        //CASE 2: ONE CHILD
+        {
+            Node *temp=root;
+            root=root->left;
+            delete temp;
+        }
+        else                              //CASE 3: two children
+        {
+            Node *temp=findMin(root->right);
+            root->key=temp->key;
+            root->right=deleteNode(root->right,temp->key);
+        }
     }
 
     return root;
