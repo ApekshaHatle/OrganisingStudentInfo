@@ -84,7 +84,7 @@ int main() {
         int src, dest, weight;
         cin >> src >> dest >> weight;
         graph[src][dest] = weight;
-        //graph[dest][src]=weight;
+        graph[dest][src]=weight;
     }
 
     // Input the source vertex
