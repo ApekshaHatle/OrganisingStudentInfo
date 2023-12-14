@@ -11,7 +11,7 @@ int minDistance(int dist[], bool sptSet[], int V) {
     int min_index;
 
     for (int v = 0; v < V; v++) {
-        if (!sptSet[v] && dist[v] <= min_dist) {
+        if (sptSet[v]==false && dist[v] <= min_dist) {
             min_dist = dist[v];
             min_index = v;
         }
@@ -56,7 +56,7 @@ void dijkstra(int graph[MAX_N][MAX_N], int src, int V) {
         for (int v = 0; v < V; v++) {
             // Update dist[v] only if it is not in the sptSet, there is an edge from u to v,
             // and the total weight of path from src to v through u is less than the current value of dist[v]
-            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+            if (sptSet[v]==false && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
                 dist[v] = dist[u] + graph[u][v];
             }
         }
@@ -84,13 +84,14 @@ int main() {
         int src, dest, weight;
         cin >> src >> dest >> weight;
         graph[src][dest] = weight;
+        //graph[dest][src]=weight;
     }
 
     // Input the source vertex
     int src;
     cout << "Enter the source vertex: ";
     cin >> src;
-
+    
     // Find and print the shortest paths
     dijkstra(graph, src, V);
 
