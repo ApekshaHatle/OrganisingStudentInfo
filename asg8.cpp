@@ -56,7 +56,7 @@ void dijkstra(int graph[MAX_N][MAX_N], int src, int V) {
         for (int v = 0; v < V; v++) {
             // Update dist[v] only if it is not in the sptSet, there is an edge from u to v,
             // and the total weight of path from src to v through u is less than the current value of dist[v]
-            if (sptSet[v]==false && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+            if (sptSet[v]==false && graph[u][v] && dist[u] + graph[u][v] < dist[v]) {
                 dist[v] = dist[u] + graph[u][v];
             }
         }
