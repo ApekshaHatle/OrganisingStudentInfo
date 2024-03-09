@@ -57,7 +57,7 @@ b) Using Prim’s algorithm.
 # Assignment 8 : 
 Represent a graph of city using adjacency matrix /adjacency list. Nodes should represent the various landmarks and links should represent the distance between them. Find the shortest path using 
 Dijkstra's algorithm from single source to all destination.
-Explaination video : https://youtu.be/zGgMg-0S_BY?si=BOHqOrQwoDb8qwQR
+Explanation video : https://youtu.be/zGgMg-0S_BY?si=BOHqOrQwoDb8qwQR
 
 # Assignment 9 :
 Implement Heap sort to sort given set of values using max or min heap.
